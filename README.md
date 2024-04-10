@@ -13,9 +13,10 @@
 1. [Download 3D slicer](https://download.slicer.org)
 2. Enable developer mode (Edit > Application Settings > Developer > Check Enable developer mode). Slicer will restart. 
 3. Clone (or download) this repository
-4. Load custom module (Edit > Application Settings > Modules > Additional modules paths > (right-sided arrows) Add > add the directory containing the .py file (BraTS_annotation.py). Slicer will restart.
-5. If the module appears in red, this is typically because there is a bug in the .py file. You can check for a traceback in the python console embeded in 3D Slicer (will give you the code line and error). 
-6. Potential issue with Qt (3D Slicer splash screen appears and disappears, fail to load) : this happens if Qt is not installed on your system (e.g on a new Linux install) : example of Qt [install on Ubuntu](https://wiki.qt.io/Install_Qt_5_on_Ubuntu) 
+4. Activate the checkbox `Enable developer mode` in `Edit -> Application Settings -> Developer -> Enable developer mode`. 
+6. Add the path of this repository in `Edit -> Application Settings -> Modules -> Additional module paths`. Slicer must be restarted.
+7. If the module appears in red, this is typically because there is a bug in the .py file. You can check for a traceback in the python console embeded in 3D Slicer. 
+8. Potential issue with Qt (3D Slicer splash screen appears and disappears, fail to load) : this happens if Qt is not installed on your system (e.g on a new Linux install) : example of Qt [install on Ubuntu](https://wiki.qt.io/Install_Qt_5_on_Ubuntu) 
 
 
 ## Official Slicer ressources
@@ -29,6 +30,7 @@
 - [Slicer Programming Tutorial](https://spujol.github.io/SlicerProgrammingTutorial/)
 - [Beyond the basics programming](https://www.slicer.org/w/img_auth.php/7/79/SlicerModulesProgrammingBeyondBasics.pdf)
 - [Python script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html)
+- 
 
 ## Slicer Jupyter
 Useful for prototyping and exploring the python API
