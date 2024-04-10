@@ -27,7 +27,7 @@
 - [Discourse](https://discourse.slicer.org)
 
 ## Python programing in Slicer
-> The Slicer python API is not fully documented but slowly improving [including here](https://slicer.readthedocs.io/en/latest/developer_guide/modules/index.html). I usually try first with the [script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html) or [discourse forum](https://discourse.slicer.org). For the segmentation editor module you can find methods in this [page](https://slicer.readthedocs.io/en/latest/developer_guide/modules/segmenteditor.html). 
+> The Slicer python API is not fully documented but slowly improving [including here](https://slicer.readthedocs.io/en/latest/developer_guide/modules/index.html). I usually try first with the [script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html) or [discourse forum](https://discourse.slicer.org). For the segmentation editor module you can find methods in this [page](https://slicer.readthedocs.io/en/latest/developer_guide/modules/segmenteditor.html). Trying to find methods using *tab completion* sometimes work in combination with the [official C++ API](https://apidocs.slicer.org/main/). ChatGPT is hit or miss, sometimes come up with hallucinated functions. 
 - [Slicer Programming Tutorial](https://spujol.github.io/SlicerProgrammingTutorial/)
 - [Beyond the basics programming](https://www.slicer.org/w/img_auth.php/7/79/SlicerModulesProgrammingBeyondBasics.pdf)
 - [Python script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html)
