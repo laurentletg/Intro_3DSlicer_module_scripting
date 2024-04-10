@@ -5,7 +5,7 @@
 ## 3D-Slicer customized GUI for annotations (BraTS semantic segmentation)
 
 <p align="center">
-  <img src="https://github.com/laurentletg/2023_ASNR_AI_workshop_curation/blob/main/readme%20image%20asnr%20ai%20workshop.png" />
+  <img src="https://github.com/laurentletg/Intro_3DSlicer_module_scripting/blob/main/readme%20image%20asnr%20ai%20workshop.png" />
 </p>
 
 
