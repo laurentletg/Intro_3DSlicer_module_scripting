@@ -1,4 +1,4 @@
-# 2023 ASNR AI workshop - Data annotation and curation
+# Introduction to 3D Slicer module creation
 
 # 3D Slicer
 
