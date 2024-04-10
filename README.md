@@ -24,13 +24,17 @@
 - [Download page](https://download.slicer.org)
 - [Documentation](https://slicer.readthedocs.io/en/latest/)
 - [Developer guide](https://slicer.readthedocs.io/en/latest/developer_guide/index.html)
-- [Slicer API (C++)](https://apidocs.slicer.org/main/)
+- [Discourse](https://discourse.slicer.org)
 
 ## Python programing in Slicer
 - [Slicer Programming Tutorial](https://spujol.github.io/SlicerProgrammingTutorial/)
 - [Beyond the basics programming](https://www.slicer.org/w/img_auth.php/7/79/SlicerModulesProgrammingBeyondBasics.pdf)
 - [Python script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html)
-- 
+
+- [Script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html)
+  > Use
+- [Slicer API (C++)](https://apidocs.slicer.org/main/)
+
 
 ## Slicer Jupyter
 Useful for prototyping and exploring the python API
