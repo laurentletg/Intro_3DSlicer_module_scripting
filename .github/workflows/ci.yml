@@ -25,5 +25,5 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install mkdocs-material
-      - working-directory: ./mkdocs_Slicer/docs
-        run: mkdocs gh-deploy --force
+      - run: pip install pillow cairosvg
+      - run: mkdocs gh-deploy --force
