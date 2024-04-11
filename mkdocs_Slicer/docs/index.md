@@ -1,7 +1,7 @@
 # 3D Slicer homemade documentation
 
 <p align="center">
-  <img src="https://github.com/laurentletg/Intro_3DSlicer_module_scripting/blob/main/readme%20image%20asnr%20ai%20workshop.png" />
+  <img src="mkdocs_Slicer/docs/readme image asnr ai workshop.png" />
 </p>
 
 
@@ -70,9 +70,6 @@ Active learning tool - DL assited annotation.
 - [MONAI label youtube - Overview](https://youtu.be/KjwuFx0pTXU)
 - [MONAI label youtube - Set-up](https://youtu.be/8y1OBQs2wis)
 - [MONAI label github](https://github.com/Project-MONAI/MONAILabel)
-
-## Git
-- [Getting started with Git](https://swcarpentry.github.io/git-novice/)
 
 
 
