@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/Users/laurentletourneau-guillon/Dropbox/RESEARCH/RESEARCH TOOLS/SLICER/SLICER GUI/2024 Slicer Polytechnique meeting/mkdocs_Slicer/mkdocs_envs_slicer/bin/python" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from pip._internal.cli.main import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
