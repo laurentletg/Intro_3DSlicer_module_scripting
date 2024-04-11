@@ -26,5 +26,5 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-material
       - run: pip install pillow cairosvg
-      - working-directory: ./mkdocs_Slicer/docs
+      - working-directory: ./mkdocs_Slicer
         run: mkdocs gh-deploy --force
