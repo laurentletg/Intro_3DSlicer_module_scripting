@@ -50,7 +50,7 @@ In order of difficulty/complexity:
 
 ## Videos and other ressources
 - [Module development series](https://www.youtube.com/@3dslicertutorial)
-- - https://github.com/SenonETS/3DSlicerTutorial_ExtensionModuleDevelopment.git
+- - [GitHub page](https://github.com/SenonETS/3DSlicerTutorial_ExtensionModuleDevelopment.git)
 - [Short series showing basic python programming and module development (in German with English subtitles)](https://youtube.com/playlist?list=PLJWCUXz3GeAfmYLiFcKus_c0jcsMnVsgb)
 
 ## Python module examples
