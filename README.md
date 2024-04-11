@@ -50,22 +50,13 @@ In order of difficulty/complexity:
 
 ## Videos and other ressources
 - [Module development series](https://www.youtube.com/@3dslicertutorial)
+- - https://github.com/SenonETS/3DSlicerTutorial_ExtensionModuleDevelopment.git
 - [Short series showing basic python programming and module development (in German with English subtitles)](https://youtube.com/playlist?list=PLJWCUXz3GeAfmYLiFcKus_c0jcsMnVsgb)
 
 ## Python module examples
 - [Robarts lab good baseline code (without .ui file - requires manually editing the widgets in the .py file)](https://github.com/lgroves6/SlicerIGTDevelopment/blob/master/YourModuleName.py)
 - [Slicer Case Iterator](https://github.com/JoostJM/SlicerCaseIterator): iterate through cases 
 
-## PyQt
-Building a GUI outside of Slicer (helps to understand how to build a GUI in Slicer)
-- [PyQt tutorial](https://realpython.com/python-pyqt-gui-calculator/)
-- [PyQt video series](https://youtu.be/Vde5SH8e1OQ)
-
-# Converting nifti files to numpy arrays
-Notebook describing basic nifti file reading and visualisation. <br />
-This is the transition point between data annotation/curation and building a model. <br />
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1zq2zceI3jvngKKagyv57evBfHR5PXPBh?usp=sharing)
 
 # Misc ressources
 ## MONAI label (3D Slicer extension)
@@ -75,8 +66,7 @@ Active learning tool - DL assited annotation.
 - [MONAI label youtube - Set-up](https://youtu.be/8y1OBQs2wis)
 - [MONAI label github](https://github.com/Project-MONAI/MONAILabel)
 
-## Git
-- [Getting started with Git](https://swcarpentry.github.io/git-novice/)
+
 
 
 
