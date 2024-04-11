@@ -1,7 +1,7 @@
 # 3D Slicer homemade documentation
 
 <p align="center">
-  <img src="mkdocs_Slicer/docs/readme image asnr ai workshop.png" />
+  <img src="https://github.com/laurentletg/Intro_3DSlicer_module_scripting/blob/main/mkdocs_Slicer/docs/readme%20image%20asnr%20ai%20workshop.png" />
 </p>
 
 
