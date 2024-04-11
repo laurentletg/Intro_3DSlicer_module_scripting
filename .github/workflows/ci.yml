@@ -1,3 +1,5 @@
+# troubleshooting https://arturomoncadatorres.com/troubleshooting-deploying-documentation-using-mkdocs/
+
 name: ci
 on:
   push:

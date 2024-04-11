@@ -24,6 +24,7 @@
 
 ## Python programing in Slicer
 > The Slicer python API is not fully documented but slowly improving [including here](https://slicer.readthedocs.io/en/latest/developer_guide/modules/index.html). I usually try first with the [script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html) or [discourse forum](https://discourse.slicer.org). For the segmentation editor module you can find methods in this [page](https://slicer.readthedocs.io/en/latest/developer_guide/modules/segmenteditor.html). Trying to find methods using *tab completion* sometimes work in combination with the [official C++ API](https://apidocs.slicer.org/main/). A [debugging tool](https://github.com/SlicerRt/SlicerDebuggingTools) exists, I was only able to make it work with VSCode not PyCharm.  ChatGPT is hit or miss, sometimes come up with hallucinated functions. 
+
 - [Slicer Programming Tutorial](https://spujol.github.io/SlicerProgrammingTutorial/)
 - [Beyond the basics programming](https://www.slicer.org/w/img_auth.php/7/79/SlicerModulesProgrammingBeyondBasics.pdf)
 - [Python script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html)
@@ -33,39 +34,33 @@
 
 ## Slicer Jupyter
 Useful for prototyping and exploring the python API
+
 - [Overview on github](https://github.com/Slicer/SlicerJupyter)
 - [Jupyter notebook examples](https://github.com/Slicer/SlicerNotebooks)
 - [Other segmentation examples](https://gist.github.com/lassoan)
 
 ## Slicer module development 
 In order of difficulty/complexity:
+
 - [Basic Python module (Hello python)](https://www.slicer.org/w/img_auth.php/c/c0/Slicer4_ProgrammingTutorial_Slicer4.5.pdf)
 - [Robarts lab documentation](https://www.robarts.ca/computerassistedsurgery/create_your_own/index.html) including well documented [example](https://github.com/lgroves6/SlicerIGTDevelopment/blob/master/YourModuleName.py) 
 - [PerkLab python module development tutorial (includes Qt designer)](https://www.slicer.org/wiki/Documentation/Nightly/Training#Tutorials_for_software_developers)
 - [Developing and contributing extensions for 3D Slicer](https://docs.google.com/presentation/d/1JXIfs0rAM7DwZAho57Jqz14MRn2BIMrjB17Uj_7Yztc/edit#slide=id.g41f90baec_028)
 
 ## Videos and other ressources
+
 - [Module development series](https://www.youtube.com/@3dslicertutorial)
 - [Short series showing basic python programming and module development (in German with English subtitles)](https://youtube.com/playlist?list=PLJWCUXz3GeAfmYLiFcKus_c0jcsMnVsgb)
 
 ## Python module examples
+
 - [Robarts lab good baseline code (without .ui file - requires manually editing the widgets in the .py file)](https://github.com/lgroves6/SlicerIGTDevelopment/blob/master/YourModuleName.py)
 - [Slicer Case Iterator](https://github.com/JoostJM/SlicerCaseIterator): iterate through cases 
-
-## PyQt
-Building a GUI outside of Slicer (helps to understand how to build a GUI in Slicer)
-- [PyQt tutorial](https://realpython.com/python-pyqt-gui-calculator/)
-- [PyQt video series](https://youtu.be/Vde5SH8e1OQ)
-
-# Converting nifti files to numpy arrays
-Notebook describing basic nifti file reading and visualisation. <br />
-This is the transition point between data annotation/curation and building a model. <br />
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1zq2zceI3jvngKKagyv57evBfHR5PXPBh?usp=sharing)
 
 # Misc ressources
 ## MONAI label (3D Slicer extension)
 Active learning tool - DL assited annotation.
+
 - [MONAI label](https://monai.io/label.html). 
 - [MONAI label youtube - Overview](https://youtu.be/KjwuFx0pTXU)
 - [MONAI label youtube - Set-up](https://youtu.be/8y1OBQs2wis)
