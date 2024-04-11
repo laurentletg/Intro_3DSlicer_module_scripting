@@ -8,6 +8,11 @@ __pycache__/
 # C extensions
 *.so
 
+# DS_Store
+*.DS_Store
+
+
+
 #idea
 .idea/
 
@@ -188,4 +193,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # idea folder, uncomment if you don't need it
-# .idea
+# .idea.DS_Store
