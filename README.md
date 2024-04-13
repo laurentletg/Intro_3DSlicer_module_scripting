@@ -57,6 +57,10 @@ In order of difficulty/complexity:
 - [Robarts lab good baseline code (without .ui file - requires manually editing the widgets in the .py file)](https://github.com/lgroves6/SlicerIGTDevelopment/blob/master/YourModuleName.py)
 - [Slicer Case Iterator](https://github.com/JoostJM/SlicerCaseIterator): iterate through cases 
 
+## PyQt
+Building a GUI outside of Slicer (helps to understand how to build a GUI in Slicer)
+- [PyQt tutorial](https://realpython.com/python-pyqt-gui-calculator/)
+- [PyQt video series](https://youtu.be/Vde5SH8e1OQ)
 
 # Misc ressources
 ## MONAI label (3D Slicer extension)
