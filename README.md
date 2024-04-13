@@ -59,6 +59,7 @@ In order of difficulty/complexity:
 
 ## PyQt
 Building a GUI outside of Slicer (helps to understand how to build a GUI in Slicer)
+
 - [PyQt tutorial](https://realpython.com/python-pyqt-gui-calculator/)
 - [PyQt video series](https://youtu.be/Vde5SH8e1OQ)
 
