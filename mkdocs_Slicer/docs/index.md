@@ -67,7 +67,7 @@ Active learning tool - DL assited annotation.
 - [MONAI label github](https://github.com/Project-MONAI/MONAILabel)
 
 
-# [Code repository](Code%20repository.md)
+# [Code repository](Code_repository.md)
 
 
 ```
