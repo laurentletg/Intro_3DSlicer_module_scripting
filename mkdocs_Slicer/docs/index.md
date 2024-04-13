@@ -66,6 +66,11 @@ Active learning tool - DL assited annotation.
 - [MONAI label youtube - Set-up](https://youtu.be/8y1OBQs2wis)
 - [MONAI label github](https://github.com/Project-MONAI/MONAILabel)
 
+## PyQt
+Building a GUI outside of Slicer (helps to understand how to build a GUI in Slicer)
+- [PyQt tutorial](https://realpython.com/python-pyqt-gui-calculator/)
+- [PyQt video series](https://youtu.be/Vde5SH8e1OQ)
+
 
 # [Code repository](Code_repository.md)
 
