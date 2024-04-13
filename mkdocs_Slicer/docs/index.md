@@ -67,6 +67,15 @@ Active learning tool - DL assited annotation.
 - [MONAI label github](https://github.com/Project-MONAI/MONAILabel)
 
 
+# Code repository
 
+## Subject hierarchy
+- [Subject hierarchy](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy)
+> ![Slicer subject hierachy.png](images%2FSlicer%20subject%20hierachy.png)
+```py
+
+```
+
+```
 
 
