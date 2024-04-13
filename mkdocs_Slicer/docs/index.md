@@ -74,7 +74,3 @@ Building a GUI outside of Slicer (helps to understand how to build a GUI in Slic
 
 # [Code repository](Code_repository.md)
 
-
-```
-
-
