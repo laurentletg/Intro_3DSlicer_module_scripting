@@ -34,6 +34,7 @@ parts/
 sdist/
 var/
 *.egg-info/
+VIDEO/
 .installed.cfg
 *.egg
 

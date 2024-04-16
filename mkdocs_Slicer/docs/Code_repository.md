@@ -1,6 +1,7 @@
 
 <!-- TOC -->
-  * [Subject hierarchy](#subject-hierarchy)
+* [Subject hierarchy](#subject-hierarchy)
+* [Save volume statistis](#save-volume-statistis)
 <!-- TOC -->
 
 # Subject hierarchy
@@ -43,5 +44,59 @@ def subjectHierarchy(self):
     for i in SegmentationNodeNames:
         itemID = shNode.GetItemChildWithName(sceneItemID, i)
         shNode.SetItemParent(itemID, folderID)
+```
 
+
+# Save volume statistis
+```py
+  def save_statistics(self):
+      volumeNode=slicer.util.getNodesByClass('vtkMRMLScalarVolumeNode')[0]
+      segmentationNode=slicer.util.getNodesByClass('vtkMRMLSegmentationNode')[0]
+      segmentationNode.SetReferenceImageGeometryParameterFromVolumeNode(volumeNode)
+      segStatLogic = SegmentStatistics.SegmentStatisticsLogic()
+      segStatLogic.getParameterNode().SetParameter("Segmentation", segmentationNode.GetID())
+      segStatLogic.getParameterNode().SetParameter("ScalarVolume", volumeNode.GetID())
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPlugin.obb_origin_ras.enabled",str(True))
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPlugin.obb_diameter_mm.enables",str(True))
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPlugin.obb_direction_ras_x_.enabled", str(True))
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPlugin.obb_direction_ras_y_.enabled",str(True))
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPlugin.obb_direction_ras_z_.enabled", str(True))
+      segStatLogic.getParameterNode().SetParameter("LabelSegmentStatisticsPLugin.obb_diameter_mm.enables", str(True))
+      segStatLogic.computeStatistics()
+      output_file_pt_id_instanceUid = re.findall(self.VOL_REGEX_PATTERN_PT_ID_INSTUID_SAVE, os.path.basename(self.currentCasePath))[0]
+
+
+      outputFilename = f'Volumes_{output_file_pt_id_instanceUid}.csv'
+      output_dir_volumes_csv = os.path.join(self.output_dir_labels, 'csv_volumes')
+      output_dir_volumes_csv = os.path.join(self.output_dir_labels, 'csv_volumes')
+      outputFilename = os.path.join(output_dir_volumes_csv, outputFilename)
+
+      segStatLogic.exportToCSVFile(outputFilename)
+      stats = segStatLogic.getStatistics()
+
+      # Read the csv and clean it up
+      df = pd.read_csv(outputFilename)
+      df.set_index('Segment')
+      df = df[['Segment', 'LabelmapSegmentStatisticsPlugin.volume_cm3']]
+      df.rename(columns={'LabelmapSegmentStatisticsPlugin.volume_cm3': "Volumes"}, inplace=True)
+      df['ID'] = df['Segment'].str.extract("(ID_[a-zA-Z0-90]+)_")
+      df['Category'] = df['Segment'].str.extract("_([A-Z]+)$")
+
+      if not os.path.exists(output_dir_volumes_csv):
+          os.makedirs(output_dir_volumes_csv)
+
+
+      if not os.path.isfile(outputFilename):
+          df.to_csv(outputFilename, index=False)
+          print(f'Wrote segmentation file here {outputFilename}')
+      else:
+          msg = qt.QMessageBox()
+          msg.setWindowTitle('Save As')
+          msg.setText(f'The file {outputFilename} already exists \n Do you want to replace the existing file?')
+          msg.setIcon(qt.QMessageBox.Warning)
+          msg.setStandardButtons(qt.QMessageBox.Ok | qt.QMessageBox.Cancel)
+          msg.exec()
+          if msg.clickedButton() == msg.button(qt.QMessageBox.Ok):
+              df.to_csv(outputFilename, index=False)
+              print(f'Wrote segmentation file here {outputFilename}')
 ```
