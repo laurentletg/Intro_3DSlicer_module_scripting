@@ -70,7 +70,7 @@ def subjectHierarchy(self):
 ```
 
 
-# Save volume statistis
+# Save volume statistics
 ```py
   def save_statistics(self):
       volumeNode=slicer.util.getNodesByClass('vtkMRMLScalarVolumeNode')[0]
