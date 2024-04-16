@@ -4,6 +4,27 @@
 * [Save volume statistis](#save-volume-statistis)
 <!-- TOC -->
 
+# Segmentation
+## Getting specific segments
+- Hierarchical data structure of the segmentation node : SegmentationNode -> Segmentation -> Segment
+- [Example on the script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#modify-segmentation-display-options)
+```py linenums="1" hl_lines="12"
+segmentation = slicer.util.getNode('Segmentation')
+#If the segment name is already known, you can get the segment by name:
+segmentname = 'Segment_1'
+
+#Change the 3D display properties of the segmentation
+displayNode = segmentation.GetDisplayNode()
+displayNode.SetOpacity3D(0.9)  # Set overall opacity of the segmentation
+displayNode.SetSegmentOpacity3D(segmentname, 0.2)  # Set opacity of a single segment
+
+
+# Segment color is not just a display property, but it is stored in the segment itself (and stored in the segmentation file)
+segment = segmentation.GetSegmentation().GetSegment(segmentname)
+segment.SetColor(1, 0, 0)  # red
+```
+
+
 # Subject hierarchy
 - [Subject hierarchy](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy)
 > ![Slicer subject hierachy.png](images%2FSlicer%20subject%20hierachy.png)
