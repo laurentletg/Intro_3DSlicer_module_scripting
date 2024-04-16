@@ -1,5 +1,7 @@
 
 <!-- TOC -->
+* [Segmentation](#segmentation)
+  * [Getting specific segments](#getting-specific-segments)
 * [Subject hierarchy](#subject-hierarchy)
 * [Save volume statistis](#save-volume-statistis)
 <!-- TOC -->

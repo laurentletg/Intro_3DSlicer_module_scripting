@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -96,7 +96,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#subject-hierarchy" class="md-skip">
+        <a href="#segmentation" class="md-skip">
           Skip to content
         </a>
       
@@ -284,6 +284,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Code repository
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -293,6 +304,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-specific-segments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting specific segments
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -316,53 +355,138 @@
 <!-- TOC -->
 <ul>
 <li><a href="#subject-hierarchy">Subject hierarchy</a></li>
+<li><a href="#save-volume-statistis">Save volume statistis</a></li>
 </ul>
 <!-- TOC -->
 
+<h1 id="segmentation">Segmentation</h1>
+<h2 id="getting-specific-segments">Getting specific segments</h2>
+<ul>
+<li>Hierarchical data structure of the segmentation node : SegmentationNode -&gt; Segmentation -&gt; Segment</li>
+<li><a href="https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#modify-segmentation-display-options">Example on the script repository</a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">segmentation</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNode</span><span class="p">(</span><span class="s1">&#39;Segmentation&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c1">#If the segment name is already known, you can get the segment by name:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">segmentname</span> <span class="o">=</span> <span class="s1">&#39;Segment_1&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="c1">#Change the 3D display properties of the segmentation</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">displayNode</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">GetDisplayNode</span><span class="p">()</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">displayNode</span><span class="o">.</span><span class="n">SetOpacity3D</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span>  <span class="c1"># Set overall opacity of the segmentation</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">displayNode</span><span class="o">.</span><span class="n">SetSegmentOpacity3D</span><span class="p">(</span><span class="n">segmentname</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># Set opacity of a single segment</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="c1"># Segment color is not just a display property, but it is stored in the segment itself (and stored in the segmentation file)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="hll"><span class="n">segment</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">GetSegmentation</span><span class="p">()</span><span class="o">.</span><span class="n">GetSegment</span><span class="p">(</span><span class="n">segmentname</span><span class="p">)</span>
+</span><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">segment</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># red</span>
+</code></pre></div></td></tr></table></div></li>
+</ul>
 <h1 id="subject-hierarchy">Subject hierarchy</h1>
 <ul>
 <li><a href="https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy">Subject hierarchy</a><blockquote>
 <p><img alt="Slicer subject hierachy.png" src="../images/Slicer%20subject%20hierachy.png" />
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">slicer</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span> <span class="nf">subjectHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="c1"># Get the subject hierarchy node</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">shNode</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">mrmlScene</span><span class="o">.</span><span class="n">GetSubjectHierarchyNode</span><span class="p">()</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="c1"># Get scene item ID first because it is the root item:</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">sceneItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">()</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="c1"># Get the scene item ID (check if the scene item exists)</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">subjectItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentCase</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">subjectItemID</span><span class="p">:</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="n">subjectItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">CreateSubjectItem</span><span class="p">(</span><span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentCase</span><span class="p">)</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="c1"># TODO: this will need to be updated when moving to multiple studies per patient (or done in a separate script)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="c1"># Creat a folder to include a study (if more than one study)</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="c1"># check if the folder exists and if not create it (avoid recreating a new one when reloading a mask)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">Study_name</span> <span class="o">=</span> <span class="s1">&#39;Study to be updated&#39;</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">folderID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">subjectItemID</span><span class="p">,</span> <span class="n">Study_name</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">folderID</span><span class="p">:</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">folderID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">CreateFolderItem</span><span class="p">(</span><span class="n">subjectItemID</span><span class="p">,</span> <span class="n">Study_name</span><span class="p">)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="c1"># set under the subject</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">folderID</span><span class="p">,</span> <span class="n">subjectItemID</span><span class="p">)</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="c1"># get all volume nodes</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">VolumeNodes</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLVolumeNode&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">VolumeNodeNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">VolumeNodes</span><span class="p">]</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="c1"># Get all child (itemID = CT or MR series/sequences)</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">VolumeNodeNames</span><span class="p">:</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">itemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">sceneItemID</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">itemID</span><span class="p">,</span> <span class="n">folderID</span><span class="p">)</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="c1"># same thing for segmentation nodes</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="n">SegmentationNodes</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLSegmentationNode&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">SegmentationNodeNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">SegmentationNodes</span><span class="p">]</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="c1"># move all segmentation nodes to the subject</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">SegmentationNodeNames</span><span class="p">:</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="n">itemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">sceneItemID</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">itemID</span><span class="p">,</span> <span class="n">folderID</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">slicer</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">def</span> <span class="nf">subjectHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="c1"># Get the subject hierarchy node</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">shNode</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">mrmlScene</span><span class="o">.</span><span class="n">GetSubjectHierarchyNode</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="c1"># Get scene item ID first because it is the root item:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">sceneItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="c1"># Get the scene item ID (check if the scene item exists)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">subjectItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentCase</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">subjectItemID</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">subjectItemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">CreateSubjectItem</span><span class="p">(</span><span class="n">shNode</span><span class="o">.</span><span class="n">GetSceneItemID</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentCase</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="c1"># TODO: this will need to be updated when moving to multiple studies per patient (or done in a separate script)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="c1"># Creat a folder to include a study (if more than one study)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># check if the folder exists and if not create it (avoid recreating a new one when reloading a mask)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="n">Study_name</span> <span class="o">=</span> <span class="s1">&#39;Study to be updated&#39;</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">folderID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">subjectItemID</span><span class="p">,</span> <span class="n">Study_name</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">folderID</span><span class="p">:</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="n">folderID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">CreateFolderItem</span><span class="p">(</span><span class="n">subjectItemID</span><span class="p">,</span> <span class="n">Study_name</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="c1"># set under the subject</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">folderID</span><span class="p">,</span> <span class="n">subjectItemID</span><span class="p">)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="c1"># get all volume nodes</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">VolumeNodes</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLVolumeNode&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="n">VolumeNodeNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">VolumeNodes</span><span class="p">]</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="c1"># Get all child (itemID = CT or MR series/sequences)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">VolumeNodeNames</span><span class="p">:</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="n">itemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">sceneItemID</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">itemID</span><span class="p">,</span> <span class="n">folderID</span><span class="p">)</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="c1"># same thing for segmentation nodes</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">SegmentationNodes</span> <span class="o">=</span> <span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLSegmentationNode&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">SegmentationNodeNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">SegmentationNodes</span><span class="p">]</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="c1"># move all segmentation nodes to the subject</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">SegmentationNodeNames</span><span class="p">:</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>        <span class="n">itemID</span> <span class="o">=</span> <span class="n">shNode</span><span class="o">.</span><span class="n">GetItemChildWithName</span><span class="p">(</span><span class="n">sceneItemID</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>        <span class="n">shNode</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span><span class="n">itemID</span><span class="p">,</span> <span class="n">folderID</span><span class="p">)</span>
 </code></pre></div></p>
 </blockquote>
 </li>
 </ul>
+<h1 id="save-volume-statistis">Save volume statistis</h1>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  <span class="k">def</span> <span class="nf">save_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>      <span class="n">volumeNode</span><span class="o">=</span><span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLScalarVolumeNode&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      <span class="n">segmentationNode</span><span class="o">=</span><span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLSegmentationNode&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      <span class="n">segmentationNode</span><span class="o">.</span><span class="n">SetReferenceImageGeometryParameterFromVolumeNode</span><span class="p">(</span><span class="n">volumeNode</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>      <span class="n">segStatLogic</span> <span class="o">=</span> <span class="n">SegmentStatistics</span><span class="o">.</span><span class="n">SegmentStatisticsLogic</span><span class="p">()</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;Segmentation&quot;</span><span class="p">,</span> <span class="n">segmentationNode</span><span class="o">.</span><span class="n">GetID</span><span class="p">())</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;ScalarVolume&quot;</span><span class="p">,</span> <span class="n">volumeNode</span><span class="o">.</span><span class="n">GetID</span><span class="p">())</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPlugin.obb_origin_ras.enabled&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPlugin.obb_diameter_mm.enables&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPlugin.obb_direction_ras_x_.enabled&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPlugin.obb_direction_ras_y_.enabled&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPlugin.obb_direction_ras_z_.enabled&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getParameterNode</span><span class="p">()</span><span class="o">.</span><span class="n">SetParameter</span><span class="p">(</span><span class="s2">&quot;LabelSegmentStatisticsPLugin.obb_diameter_mm.enables&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">computeStatistics</span><span class="p">()</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>      <span class="n">output_file_pt_id_instanceUid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VOL_REGEX_PATTERN_PT_ID_INSTUID_SAVE</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currentCasePath</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>      <span class="n">outputFilename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Volumes_</span><span class="si">{</span><span class="n">output_file_pt_id_instanceUid</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>      <span class="n">output_dir_volumes_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir_labels</span><span class="p">,</span> <span class="s1">&#39;csv_volumes&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>      <span class="n">output_dir_volumes_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir_labels</span><span class="p">,</span> <span class="s1">&#39;csv_volumes&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>      <span class="n">outputFilename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir_volumes_csv</span><span class="p">,</span> <span class="n">outputFilename</span><span class="p">)</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>      <span class="n">segStatLogic</span><span class="o">.</span><span class="n">exportToCSVFile</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">)</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>      <span class="n">stats</span> <span class="o">=</span> <span class="n">segStatLogic</span><span class="o">.</span><span class="n">getStatistics</span><span class="p">()</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>      <span class="c1"># Read the csv and clean it up</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>      <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">)</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>      <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Segment&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>      <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Segment&#39;</span><span class="p">,</span> <span class="s1">&#39;LabelmapSegmentStatisticsPlugin.volume_cm3&#39;</span><span class="p">]]</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>      <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LabelmapSegmentStatisticsPlugin.volume_cm3&#39;</span><span class="p">:</span> <span class="s2">&quot;Volumes&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Segment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(ID_[a-zA-Z0-90]+)_&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Segment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;_([A-Z]+)$&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>      <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_dir_volumes_csv</span><span class="p">):</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>          <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir_volumes_csv</span><span class="p">)</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>      <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">):</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>          <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrote segmentation file here </span><span class="si">{</span><span class="n">outputFilename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>      <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>          <span class="n">msg</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">()</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>          <span class="n">msg</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;Save As&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>          <span class="n">msg</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The file </span><span class="si">{</span><span class="n">outputFilename</span><span class="si">}</span><span class="s1"> already exists </span><span class="se">\n</span><span class="s1"> Do you want to replace the existing file?&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>          <span class="n">msg</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Warning</span><span class="p">)</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>          <span class="n">msg</span><span class="o">.</span><span class="n">setStandardButtons</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Ok</span> <span class="o">|</span> <span class="n">qt</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>          <span class="n">msg</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>          <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">clickedButton</span><span class="p">()</span> <span class="o">==</span> <span class="n">msg</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Ok</span><span class="p">):</span>
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>              <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>              <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrote segmentation file here </span><span class="si">{</span><span class="n">outputFilename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 
@@ -420,7 +544,7 @@
       
     
     <a href="https://github.com/laurentletg" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
     </a>
   
 </div>
@@ -438,7 +562,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.path", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
       
     
   </body>
