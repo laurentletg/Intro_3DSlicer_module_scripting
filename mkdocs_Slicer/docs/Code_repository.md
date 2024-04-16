@@ -3,7 +3,7 @@
 * [Segmentation](#segmentation)
   * [Getting specific segments](#getting-specific-segments)
 * [Subject hierarchy](#subject-hierarchy)
-* [Save volume statistis](#save-volume-statistis)
+* [Save volume statistics](#save-volume-statistics)
 <!-- TOC -->
 
 # Segmentation
