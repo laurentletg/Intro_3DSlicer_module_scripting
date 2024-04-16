@@ -8,7 +8,7 @@
 
 # Segmentation
 ## Getting specific segments
-- Hierarchical data structure of the segmentation node : SegmentationNode -> Segmentation -> Segment
+- Hierarchical data structure of the segmentation node : SegmentationNode -> Segmentation -> Segment. The key is `segmentation.GetSegmentation().GetSegment(segmentname)`
 - [Example on the script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#modify-segmentation-display-options)
 ```py linenums="1" hl_lines="12"
 segmentation = slicer.util.getNode('Segmentation')

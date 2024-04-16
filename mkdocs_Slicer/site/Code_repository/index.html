@@ -357,7 +357,7 @@
 <li><a href="#segmentation">Segmentation</a></li>
 <li><a href="#getting-specific-segments">Getting specific segments</a></li>
 <li><a href="#subject-hierarchy">Subject hierarchy</a></li>
-<li><a href="#save-volume-statistis">Save volume statistis</a></li>
+<li><a href="#save-volume-statistics">Save volume statistics</a></li>
 </ul>
 <!-- TOC -->
 
@@ -437,7 +437,7 @@
 </blockquote>
 </li>
 </ul>
-<h1 id="save-volume-statistis">Save volume statistis</h1>
+<h1 id="save-volume-statistics">Save volume statistics</h1>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  <span class="k">def</span> <span class="nf">save_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>      <span class="n">volumeNode</span><span class="o">=</span><span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLScalarVolumeNode&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      <span class="n">segmentationNode</span><span class="o">=</span><span class="n">slicer</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getNodesByClass</span><span class="p">(</span><span class="s1">&#39;vtkMRMLSegmentationNode&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
