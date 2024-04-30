@@ -1,10 +1,5 @@
 
-<!-- TOC -->
-* [Segmentation](#segmentation)
-  * [Getting specific segments](#getting-specific-segments)
-* [Subject hierarchy](#subject-hierarchy)
-* [Save volume statistics](#save-volume-statistics)
-<!-- TOC -->
+
 
 # Segmentation
 ## Getting specific segments
@@ -122,4 +117,43 @@ def subjectHierarchy(self):
           if msg.clickedButton() == msg.button(qt.QMessageBox.Ok):
               df.to_csv(outputFilename, index=False)
               print(f'Wrote segmentation file here {outputFilename}')
+```
+
+# Keyboard shortcuts from configuration file
+- Pass the method name (without 'self.' and '()') and the keyboard shortcut. Make sure this does not conflict with the default shortcuts.
+```yaml
+KEYBOARD_SHORTCUTS: 
+  - method: "keyboard_toggle_fill"
+    shortcut: "d"
+```
+Corresponds to section in `SEGMENTER_V2Widget.setup()` immediately after the widget connections. Adapted from the [3D Slicer script repository](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#customize-keyboard-shortcuts)
+```py
+    # KEYBOARD SHORTCUTS
+    keyboard_shortcuts = []
+    for i in self.config_yaml["KEYBOARD_SHORTCUTS"]:
+        shortcutKey = i.get("shortcut")
+        callback_name = i.get("method")
+        callback = getattr(self, callback_name)
+        keyboard_shortcuts.append((shortcutKey, callback))
+
+    print(f'keyboard_shortcuts: {keyboard_shortcuts}')
+
+
+    for (shortcutKey, callback) in keyboard_shortcuts:
+        shortcut = qt.QShortcut(slicer.util.mainWindow())
+        shortcut.setKey(qt.QKeySequence(shortcutKey))
+        shortcut.connect("activated()", callback)
+```
+For buttons that 'toggles' this method was created:
+- [ ] create a more general method that can be used for all buttons that toggle on and off.
+```py
+  def keyboard_toggle_fill(self):
+      print('keyboard_toggle_fill')
+      if self.ui.pushButton_ToggleFill.isChecked():
+          self.ui.pushButton_ToggleFill.toggle()
+          self.toggleFillButton()
+      else:
+          self.ui.pushButton_ToggleFill.toggle()
+          self.toggleFillButton()
+
 ```
