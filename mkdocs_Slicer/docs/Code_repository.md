@@ -1,5 +1,11 @@
 
-
+<!-- TOC -->
+* [Segmentation](#segmentation)
+  * [Getting specific segments](#getting-specific-segments)
+* [Subject hierarchy](#subject-hierarchy)
+* [Save volume statistics](#save-volume-statistics)
+* [Keyboard shortcuts from configuration file](#keyboard-shortcuts-from-configuration-file)
+<!-- TOC -->
 
 # Segmentation
 ## Getting specific segments
