@@ -26,6 +26,33 @@ displayNode.SetSegmentOpacity3D(segmentname, 0.2)  # Set opacity of a single seg
 segment = segmentation.GetSegmentation().GetSegment(segmentname)
 segment.SetColor(1, 0, 0)  # red
 ```
+## Changing the ID color based on completion status
+
+```py
+    def update_current_case_paths_by_segmented_volumes(self):
+        if not self.VolumeNode and not self.segmentationNode:
+            qt.QMessageBox.warning(None, 'No case selected', 'Please load volumes and segmentations first')
+            raise ValueError('No case selected')
+        print('coloring segmented volumes')
+        print(self.OutDir)
+        segmentations = glob(os.path.join(self.config['OutDir'], self.config['SEGM_FILE_TYPE']))
+        print(len(segmentations))
+        print(self.config['SEGM_REGEX'])
+        print(os.path.basename(segmentations[0]))
+        segmented_IDs = [re.findall(self.config['SEGM_REGEX'], os.path.basename(segmentation))[0] for segmentation in
+                         segmentations]
+
+        self.ui.SlicerDirectoryListView.clear()
+        for case in self.CasesPaths:
+            case_id = re.findall(self.config['VOL_REGEX'], case)[0]
+            item = qt.QListWidgetItem(case_id)
+            if not case_id in segmented_IDs:
+                item.setForeground(qt.QColor('red'))
+
+            elif case_id in segmented_IDs:
+                item.setForeground(qt.QColor('green'))
+            self.ui.SlicerDirectoryListView.addItem(item)
+```
 
 
 # Subject hierarchy
