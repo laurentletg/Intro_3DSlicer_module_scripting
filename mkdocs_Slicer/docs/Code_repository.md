@@ -2,10 +2,54 @@
 <!-- TOC -->
 * [Segmentation](#segmentation)
   * [Getting specific segments](#getting-specific-segments)
+  * [Changing the ID color based on completion status](#changing-the-id-color-based-on-completion-status)
 * [Subject hierarchy](#subject-hierarchy)
 * [Save volume statistics](#save-volume-statistics)
 * [Keyboard shortcuts from configuration file](#keyboard-shortcuts-from-configuration-file)
 <!-- TOC -->
+
+# Subject hierarchy
+- [Subject hierarchy](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy)
+> ![Slicer subject hierachy.png](images%2FSlicer%20subject%20hierachy.png)
+```py
+import slicer
+def subjectHierarchy(self):
+    # Get the subject hierarchy node
+    shNode = slicer.mrmlScene.GetSubjectHierarchyNode()
+
+    # Get scene item ID first because it is the root item:
+    sceneItemID = shNode.GetSceneItemID()
+    # Get the scene item ID (check if the scene item exists)
+    subjectItemID = shNode.GetItemChildWithName(shNode.GetSceneItemID(), self.currentCase)
+    if not subjectItemID:
+        subjectItemID = shNode.CreateSubjectItem(shNode.GetSceneItemID(), self.currentCase)
+
+    # TODO: this will need to be updated when moving to multiple studies per patient (or done in a separate script)
+    # Creat a folder to include a study (if more than one study)
+    # check if the folder exists and if not create it (avoid recreating a new one when reloading a mask)
+    Study_name = 'Study to be updated'
+    folderID = shNode.GetItemChildWithName(subjectItemID, Study_name)
+    if not folderID:
+        folderID = shNode.CreateFolderItem(subjectItemID, Study_name)
+    # set under the subject
+    shNode.SetItemParent(folderID, subjectItemID)
+
+    # get all volume nodes
+    VolumeNodes = slicer.util.getNodesByClass('vtkMRMLVolumeNode')
+    VolumeNodeNames = [i.GetName() for i in VolumeNodes]
+    # Get all child (itemID = CT or MR series/sequences)
+    for i in VolumeNodeNames:
+        itemID = shNode.GetItemChildWithName(sceneItemID, i)
+        shNode.SetItemParent(itemID, folderID)
+    # same thing for segmentation nodes
+    SegmentationNodes = slicer.util.getNodesByClass('vtkMRMLSegmentationNode')
+    SegmentationNodeNames = [i.GetName() for i in SegmentationNodes]
+    # move all segmentation nodes to the subject
+    for i in SegmentationNodeNames:
+        itemID = shNode.GetItemChildWithName(sceneItemID, i)
+        shNode.SetItemParent(itemID, folderID)
+```
+
 
 # Segmentation
 ## Getting specific segments
@@ -54,48 +98,52 @@ segment.SetColor(1, 0, 0)  # red
             self.ui.SlicerDirectoryListView.addItem(item)
 ```
 
+## Nifti: Updating the segment names and color 
+e.g. import from nnUNet
 
-# Subject hierarchy
-- [Subject hierarchy](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy)
-> ![Slicer subject hierachy.png](images%2FSlicer%20subject%20hierachy.png)
 ```py
-import slicer
-def subjectHierarchy(self):
-    # Get the subject hierarchy node
-    shNode = slicer.mrmlScene.GetSubjectHierarchyNode()
 
-    # Get scene item ID first because it is the root item:
-    sceneItemID = shNode.GetSceneItemID()
-    # Get the scene item ID (check if the scene item exists)
-    subjectItemID = shNode.GetItemChildWithName(shNode.GetSceneItemID(), self.currentCase)
-    if not subjectItemID:
-        subjectItemID = shNode.CreateSubjectItem(shNode.GetSceneItemID(), self.currentCase)
+    def convert_nifti_header_Segment(self):
 
-    # TODO: this will need to be updated when moving to multiple studies per patient (or done in a separate script)
-    # Creat a folder to include a study (if more than one study)
-    # check if the folder exists and if not create it (avoid recreating a new one when reloading a mask)
-    Study_name = 'Study to be updated'
-    folderID = shNode.GetItemChildWithName(subjectItemID, Study_name)
-    if not folderID:
-        folderID = shNode.CreateFolderItem(subjectItemID, Study_name)
-    # set under the subject
-    shNode.SetItemParent(folderID, subjectItemID)
+        # Check if the first segment starts with Segment_1 (e.g. loaded from nnunet).
+        # If so change the name and colors of the segments to match the ones in the config file
+        first_segment_name = self.segmentationNode.GetSegmentation().GetNthSegment(0).GetName()
+        print(f'first_segment_name :: {first_segment_name}')
+        if first_segment_name.startswith("Segment_"):
+            # iterate through all segments and rename them
 
-    # get all volume nodes
-    VolumeNodes = slicer.util.getNodesByClass('vtkMRMLVolumeNode')
-    VolumeNodeNames = [i.GetName() for i in VolumeNodes]
-    # Get all child (itemID = CT or MR series/sequences)
-    for i in VolumeNodeNames:
-        itemID = shNode.GetItemChildWithName(sceneItemID, i)
-        shNode.SetItemParent(itemID, folderID)
-    # same thing for segmentation nodes
-    SegmentationNodes = slicer.util.getNodesByClass('vtkMRMLSegmentationNode')
-    SegmentationNodeNames = [i.GetName() for i in SegmentationNodes]
-    # move all segmentation nodes to the subject
-    for i in SegmentationNodeNames:
-        itemID = shNode.GetItemChildWithName(sceneItemID, i)
-        shNode.SetItemParent(itemID, folderID)
+            for i in range(self.segmentationNode.GetSegmentation().GetNumberOfSegments()):
+                segment_name = self.segmentationNode.GetSegmentation().GetNthSegment(i).GetName()
+                print(f' src segment_name :: {segment_name}')
+                for label in self.config_yaml["labels"]:
+                    if label["value"] == int(segment_name.split("_")[-1]):
+                        self.segmentationNode.GetSegmentation().GetNthSegment(i).SetName(label['name'])
+                        # set color
+                        self.segmentationNode.GetSegmentation().GetNthSegment(i).SetColor(label["color_r"] / 255,
+                                                                                          label["color_g"] / 255,
+                                                                                          label["color_b"] / 255)
+
+        self.add_missing_nifti_segment()
+
+    def add_missing_nifti_segment(self):
+        for label in self.config_yaml['labels']:
+            name = label['name']
+            segment_names = [self.segmentationNode.GetSegmentation().GetNthSegment(node).GetName() for node in
+                             range(self.segmentationNode.GetSegmentation().GetNumberOfSegments())]
+            if not name in segment_names:
+                self.segmentationNode.GetSegmentation().AddEmptySegment(name)
+                segmentid = self.segmentationNode.GetSegmentation().GetSegmentIdBySegmentName(name)
+                segment = self.segmentationNode.GetSegmentation().GetSegment(segmentid)
+                segment.SetColor(label["color_r"] / 255,
+                                 label["color_g"] / 255,
+                                 label["color_b"] / 255)
+
 ```
+
+
+## Segment QC
+
+
 
 
 # Save volume statistics
