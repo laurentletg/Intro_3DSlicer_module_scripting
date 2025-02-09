@@ -8,6 +8,22 @@
 * [Keyboard shortcuts from configuration file](#keyboard-shortcuts-from-configuration-file)
 <!-- TOC -->
 
+
+# Layout
+
+## Compare view widescreen (with 1 row and 2 columns). I have not yet figured out how to get the 1x1 view. 
+```py
+# Set to widescreen compare view
+layoutManager = slicer.app.layoutManager()
+layoutManager.setLayout(slicer.vtkMRMLLayoutNode.SlicerLayoutCompareWidescreenView)
+
+# Configure the layout to display 2 viewers in Compare Widescreen mode
+layoutNode = slicer.app.layoutManager().layoutLogic().GetLayoutNode()
+layoutNode.SetNumberOfCompareViewRows(1)  # 1 row
+layoutNode.SetNumberOfCompareViewColumns(2)  # 2 columns
+```
+
+
 # Subject hierarchy
 - [Subject hierarchy](https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#subject-hierarchy)
 > ![Slicer subject hierachy.png](images%2FSlicer%20subject%20hierachy.png)
@@ -238,3 +254,5 @@ For buttons that 'toggles' this method was created:
           self.toggleFillButton()
 
 ```
+
+
